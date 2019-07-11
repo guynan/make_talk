@@ -1,0 +1,47 @@
+
+\nonstopmode
+
+\documentclass[10pt]{beamer}
+
+\usetheme{default}
+\usepackage{fancyhdr}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[top=0.5cm,bottom=0.5cm]{geometry}
+
+\addtolength{\topmargin}{5pt}
+\addtolength{\headsep}{5pt}
+\addtolength{\oddsidemargin}{-4pt}
+\addtolength{\marginparwidth}{20pt}
+\addtolength{\marginparsep}{-3pt}
+\addtolength{\textwidth}{-5pt}
+
+%gets rid of bottom navigation bars
+\setbeamertemplate{footline}{}
+
+%gets rid of bottom navigation symbols
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{}
+\fancyhead[RE,LO]{}
+\fancyfoot[CE,CO]{Guy Nankivell}
+\fancyfoot[LE,RO]{\LaTeX \& \texttt{Makefiles}}
+ 
+%\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usefonttheme{serif}
+
+\begin{document}
+
+
+\begin{frame}
+\frametitle{This is the first slide}
+This is a test frame
+\end{frame}
+
+\end{document}

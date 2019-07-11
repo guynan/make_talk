@@ -1,0 +1,174 @@
+
+\nonstopmode
+
+%% LyX 2.3.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,british]{article}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[landscape]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=3cm,lmargin=4cm,rmargin=4cm}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{float}
+\PassOptionsToPackage{normalem}{ulem}
+\usepackage{ulem}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{lmodern}
+
+% Alter some LaTeX defaults for better treatment of figures:
+% See p.105 of "TeX Unbound" for suggested values.
+% See pp. 199-200 of Lamport's "LaTeX" book for details.
+%   General parameters, for ALL pages:
+\renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+\renewcommand{\bottomfraction}{0.8}	% max fraction of floats at bottom
+%   Parameters for TEXT pages (not float pages):
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}     % 2 may work better
+\renewcommand{\textfraction}{0.01}	% allow minimal text w. figs
+%   Parameters for FLOAT pages (not text pages):
+\renewcommand{\floatpagefraction}{0.5}	% require fuller float pages
+% N.B.: floatpagefraction MUST be less than topfraction !!
+
+
+
+\usepackage[outermarks]{titleps} 
+
+% let's assume top/bot
+\def\presectiontitle{}
+\newpagestyle{main}{
+   
+\sethead
+{} 
+{    \Large \bf
+      \bottitlemarks
+      \ifx\sectiontitle\presectiontitle             
+      \sectiontitle  
+      \ (cont.)
+      \fi            
+      \bottitlemarks           
+      \global\let\presectiontitle\sectiontitle 
+}
+{}
+
+\setfoot
+{ \thepage }
+{}  
+{ \ Magic of Makefiles --  -- Guy Nankivell}
+\footrule	
+\headrule
+}
+
+
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
+\AtBeginDocument{
+  \def\labelitemiii{\(\circ\)}
+}
+
+\makeatother
+
+
+\begin{document}
+\date{}
+\title{Magic of Makefiles}
+\author{Guy Nankivell}
+
+\maketitle
+\newpage{}
+
+\LARGE
+\pagestyle{main}
+
+\section{History of Makefiles}
+\begin{itemize}
+	\item Born in 1976 (43 years ago)
+\end{itemize}
+
+\section{Requirements of a Build System}
+\begin{itemize}
+	\item Portable
+	\item Efficient (Stop unecessary recompilations)
+	\item Language Agnostic (nested projects)
+	\item Fast
+	\item Modular
+	\item Flexible
+\end{itemize}
+
+\section{A Little Note...}
+What I henceforth refer to as `make' is
+the GNU implementation. This is due to being the most common reference
+for \texttt{make} in the wild.
+
+
+
+\section{Cornerstone Features of Make}
+\begin{itemize}
+\item Parallel
+\end{itemize}
+
+
+\section{Okay, but can it work for us?}
+It is used as the build system for the Linux kernel so it must be
+doing something right...
+
+
+\section{Drawbacks}
+\begin{itemize}
+\item Arcane Syntax
+\end{itemize}
+
+
+\section{Compiling this presentation...}
+\lstset{basicstyle=\scriptsize\ttfamily,language=[gnu] make}
+\begin{lstlisting}
+CC =            pdflatex
+SRC =           talk.tex
+OUT_DIR =       tmp
+CFLAGS =        -output-directory $(OUT_DIR)
+FILE_REDIR =    /dev/null
+FNAME =         out.pdf
+
+all: $(OUT_DIR)
+@ $(CC) $(CFLAGS) $(SRC) > $(FILE_REDIR)
+@ mv $(OUT_DIR)/*.pdf ./$(FNAME)
+
+clean:
+@ $(RM) -r $(OUT_DIR)/
+
+$(OUT_DIR): 
+@ mkdir -p $(OUT_DIR)/
+
+\end{lstlisting}
+
+\section{Plays nicely with \texttt{vim}}
+From command mode in \texttt{vim} all one has to do to action the
+\texttt{Makefile} in the same directory to which your session is running
+is;
+\begin{center}
+	\texttt{:make}
+\end{center}
+
+Which keeps your editing session alive and allows you to view the
+output of the command and then you need only press enter to drop back into
+editing mode
+
+\section{\textit{Finis.}}
+
+\begin{center}
+			\texttt{Questions?}
+\end{center}
+
+
+\end{document}

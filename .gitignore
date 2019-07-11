@@ -1,0 +1,9 @@
+
+tmp/
+
+*.log
+*.snm
+*.aux
+*.dvi
+
+
