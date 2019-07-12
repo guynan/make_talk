@@ -64,7 +64,7 @@
 \setfoot
 { \thepage }
 {}  
-{ \ Magic of Makefiles --  -- Guy Nankivell}
+{ \ Magic of Makefiles -- Guy Nankivell}
 \footrule	
 \headrule
 }
@@ -94,7 +94,19 @@
 \section{History of Makefiles}
 \begin{itemize}
 	\item Born in 1976 (43 years ago)
+	\item Bell Labs Creation
+	\item ``Printable, debuggable understandable stuff"
+	\item Designed to replace a bevvy of shell scripts
 \end{itemize}
+
+\section{How it works}
+This is alarmingly simple in its design;\\\\
+%
+It leverages the syscall \texttt{stat} to check when the output file was
+created. If there are any edits made on files that are \emph{newer} than this,
+it recompiles the files. \\\\
+%
+This gives the user really granular control over the recompilation phase.
 
 \section{Requirements of a Build System}
 \begin{itemize}
@@ -112,11 +124,40 @@ the GNU implementation. This is due to being the most common reference
 for \texttt{make} in the wild.
 
 
-
 \section{Cornerstone Features of Make}
 \begin{itemize}
 \item Parallel
+\item Text Replacement
+\item Ubiquity
+\item Everyone knows how to use it (Just type \texttt{make}!!)
 \end{itemize}
+
+\section{Contextualising my Usage}
+\begin{itemize}
+\item C
+\item Fortran
+\item \LaTeX
+\item x86-64 Assembly
+\item Installation Scripts
+\end{itemize}
+
+
+\section{Anatomy of a Makefile}
+%\lstset{basicstyle=\scriptsize\small,language=[gnu] make}
+\lstset{language=[gnu] make}
+\begin{lstlisting}
+CONSTANTS =	this that
+JUNK =		*.aux *.snm *.log *.dvi
+
+target: deps 
+	recipe to build
+
+clean:
+	rm $(JUNK)
+
+.PHONY: clean
+\end{lstlisting}
+
 
 
 \section{Okay, but can it work for us?}
@@ -127,11 +168,12 @@ doing something right...
 \section{Drawbacks}
 \begin{itemize}
 \item Arcane Syntax
+\item Doesn't do Dependency Resolution
 \end{itemize}
 
 
 \section{Compiling this presentation...}
-\lstset{basicstyle=\scriptsize\ttfamily,language=[gnu] make}
+\lstset{language=[gnu] make}
 \begin{lstlisting}
 CC =            pdflatex
 SRC =           talk.tex
@@ -167,7 +209,7 @@ editing mode
 \section{\textit{Finis.}}
 
 \begin{center}
-			\texttt{Questions?}
+Questions?
 \end{center}
 
 

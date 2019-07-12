@@ -1,12 +1,13 @@
 
 CC = 			pdflatex
-SRC = 			test.tex
-#SRC = 			talk.tex
+#SRC = 			test.tex
+SRC = 			talk.tex
 OUT_DIR =		tmp
 CFLAGS = 		-output-directory $(OUT_DIR)
 FILE_REDIR = 	/dev/null
 FNAME = 		out.pdf
 
+PDF_VIEW =		apvlv
 
 all: $(OUT_DIR)
 	@ $(CC) $(CFLAGS) $(SRC) > $(FILE_REDIR)
@@ -18,3 +19,7 @@ clean:
 $(OUT_DIR): 
 	@ mkdir -p $(OUT_DIR)/
 
+view:
+	@ $(PDF_VIEW) $(FNAME)
+
+.PHONY: clean
